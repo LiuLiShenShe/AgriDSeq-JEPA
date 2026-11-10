@@ -1,0 +1,2 @@
+optimizer_updates,soil,crop,weed,mIoU
+1000,99.3,93.53,45.35,79.39

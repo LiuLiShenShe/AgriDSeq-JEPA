@@ -17,11 +17,12 @@ from src.dataset.phenobench import convert_partial_semantics
 parser = argparse.ArgumentParser()
 parser.add_argument('--root', type=Path, default=Path('/data/datasets/PhenoBench/PhenoBench-v110'))
 parser.add_argument('--run', type=Path, default=Path('runs/phenobench_dseq_vitb16_s20261110'))
+parser.add_argument('--output', type=Path, help='Separate directory for an intermediate validation snapshot')
 args = parser.parse_args()
 rows = []
 totals = dict(weed_tp=0, weed_fp=0, weed_fn=0, small_components=0, small_recalled=0)
 palette = np.array([[95,65,40], [30,200,65], [220,45,180]], dtype=np.uint8)
-destination = args.run/'analysis'
+destination = args.output or args.run/'analysis'
 destination.mkdir(exist_ok=True)
 for path in sorted((args.root/'val'/'semantics').glob('*.png')):
     gt = convert_partial_semantics(np.array(Image.open(path)))
