@@ -204,6 +204,14 @@ cython_debug/
 .cursorignore
 .cursorindexingignore
 
+# Agriculture artifacts and existing external raw data
+runs/
+data/
+*.pth
+*.pt
+*.ckpt
+*.zip
+
 # Marimo
 marimo/_static/
 marimo/_lsp/

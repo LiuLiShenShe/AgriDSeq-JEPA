@@ -1,0 +1,62 @@
+{
+  "step": 20,
+  "restore": true,
+  "gradients": {
+    "backbone": {
+      "gradient_norm": 1.1600595712661743,
+      "max_abs_update": 1.2599572073668242e-05
+    },
+    "decoder": {
+      "gradient_norm": 6.891049385070801,
+      "max_abs_update": 1.2839213013648987e-05
+    },
+    "auxiliary": {
+      "gradient_norm": 1.9034632444381714,
+      "max_abs_update": 1.2882053852081299e-05
+    }
+  },
+  "one_val_prediction": {
+    "soil": 72.10889117788095,
+    "crop": 14.471555933736557,
+    "weed": 0.07406326798559133,
+    "mIoU": 28.884836793201032,
+    "confusion": [
+      [
+        741358,
+        109051,
+        176600
+      ],
+      [
+        1063,
+        18878,
+        1358
+      ],
+      [
+        37,
+        99,
+        132
+      ]
+    ]
+  },
+  "official_one_image": {
+    "soil": 72.11,
+    "crop": 14.47,
+    "weed": 0.07,
+    "mIoU": 28.88
+  },
+  "compute": {
+    "optimizer_updates": 20,
+    "consumed_microbatches": 160,
+    "main_loss": 1.118173398077488,
+    "aux_loss": 1.1947389841079712,
+    "lr": 1.2667654e-06,
+    "next_lr": 1.333432e-06,
+    "microbatch": 2,
+    "accumulation_steps": 8,
+    "effective_batch": 16,
+    "update_seconds": 0.8538138230214827,
+    "elapsed_seconds": 18.18196233297931,
+    "peak_allocated_gib": 3.5138134956359863,
+    "peak_reserved_gib": 3.765625
+  }
+}

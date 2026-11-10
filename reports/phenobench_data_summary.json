@@ -1,0 +1,56 @@
+{
+  "root": "/data/datasets/PhenoBench/PhenoBench-v110",
+  "version": "1.1.0",
+  "readme_sha256": "2b54ae5b6b9c6265d47546d1377b5b020132917a19b77c2c5815440de7201be8",
+  "manifest_sha256": "6ce0232f323c1bf055f4b6f588872ca5605ae964bb26a541109780e63d307f3b",
+  "test_images_count_only": 693,
+  "splits": {
+    "train": {
+      "image_count": 1407,
+      "mask_count": 1407,
+      "raw_label_pixels": [
+        1293238516,
+        153463715,
+        7078797,
+        21310522,
+        254882
+      ],
+      "mapped_label_pixels": [
+        1293238516,
+        174774237,
+        7333679
+      ],
+      "mapped_percent": [
+        87.65659969413882,
+        11.846318478777464,
+        0.49708182708371507
+      ],
+      "all_image_headers": "1024x1024,8-bit RGB",
+      "all_mask_headers": "1024x1024,16-bit grayscale PNG"
+    },
+    "val": {
+      "image_count": 772,
+      "mask_count": 772,
+      "raw_label_pixels": [
+        727889307,
+        66418271,
+        4088634,
+        10916383,
+        188077
+      ],
+      "mapped_label_pixels": [
+        727889307,
+        77334654,
+        4276711
+      ],
+      "mapped_percent": [
+        89.91830793687099,
+        9.553377368907237,
+        0.5283146942217734
+      ],
+      "all_image_headers": "1024x1024,8-bit RGB",
+      "all_mask_headers": "1024x1024,16-bit grayscale PNG"
+    }
+  },
+  "audit_seconds": 97.617
+}

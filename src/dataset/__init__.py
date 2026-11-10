@@ -5,6 +5,7 @@ from src.dataset.fgvc import make_cub200, make_stanford_cars, make_inaturalist21
 from src.dataset.clevr import make_clevr
 from src.dataset.coco import make_coco, collate_detection
 from src.dataset.ade20k import make_ade20k, collate_segmentation
+from src.dataset.phenobench import make_phenobench
 
 
 __all__ = [
@@ -19,6 +20,7 @@ __all__ = [
     "make_clevr",
     "make_coco",
     "make_ade20k",
+    "make_phenobench",
     "collate_detection",
     "collate_segmentation",
     "make_dataset",
@@ -33,6 +35,7 @@ DATASET_FACTORIES = {
     "clevr": make_clevr,
     "coco": make_coco,
     "ade20k": make_ade20k,
+    "phenobench": make_phenobench,
 }
 
 # -- number of classes of every supported dataset, for config sanity checks
@@ -43,6 +46,7 @@ NUM_CLASSES = {
     "inaturalist21": 10000,
     "coco": 91,       # 80 things + background, original COCO id range
     "ade20k": 150,
+    "phenobench": 3,
 }
 
 

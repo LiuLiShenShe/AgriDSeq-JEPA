@@ -1,3 +1,34 @@
+# AgriDSeq-JEPA
+
+独立农业迁移工程，采用作者DSeq-JEPA ViT-B/16与官方UPerNet，全参数微调PhenoBench v1.1.0三类语义分割。上游固定SHA `123082374389f78e4516157187681f9d5edb4310`，完整保留原MIT许可证及作者署名。历史AgriSA-JEPA只读归档，本项目无旧训练框架依赖。
+
+当前真实完成进度与指标见 [最终阶段报告](reports/s1_final_report.md)。正式预算是seed20261110、单卡A6000、microbatch2×accum8=16、10000 optimizer updates；smoke不计入正式结果。
+
+```bash
+uv venv --python 3.11 .venv
+uv pip install --python .venv/bin/python -r configs/agriculture/requirements-lock.txt
+# 使用已有PhenoBench根目录，按本机位置修改data.root_path。
+# 从作者Drive下载真实dseqjepa_vit_base_latest.pth到runs/pretrained/，SHA在配置中严格校验。
+PYTHONPATH=. .venv/bin/python -m pytest tests/agriculture -q
+CUDA_VISIBLE_DEVICES=1 PYTHONPATH=. .venv/bin/python scripts/agriculture/run_phenobench.py --mode verify
+CUDA_VISIBLE_DEVICES=1 OMP_NUM_THREADS=4 PYTHONPATH=. .venv/bin/python scripts/agriculture/run_phenobench.py --mode smoke
+bash scripts/agriculture/train_phenobench.sh
+bash scripts/agriculture/eval_phenobench.sh
+.venv/bin/phenobench-eval --task semantics \
+  --phenobench_dir /data/datasets/PhenoBench/PhenoBench-v110 \
+  --prediction_dir runs/phenobench_dseq_vitb16_s20261110/predictions/val --split val
+```
+
+恢复使用train脚本的`--checkpoint <latest路径>`。禁止对已有run不带checkpoint重新启动；训练每1k评价全部772val，最终脚本恢复best再次导出完整1024×1024预测。soil/crop/weed为0/1/2，partial3→1/4→2，padding才255。官方devkit锁定SHA `0edc128ef7f67c8c6577554c7d1a2e382e2ea81f`；CLI不打印soil，由未修改的官方函数补全。正式指标优先官方评价，confusion只交叉核对。
+
+官方权重来源：[下载](https://drive.google.com/uc?export=download&id=1CjueAvk52g5YIf30yI7ZFDIbsfqYq5tt)，343239900bytes，SHA256 `3e3ca279c9a4929bfb66c10c3a21f92a702899bb556cda9e528ee57e72a2cc5e`。公开文件为裸state_dict，项目只为官方loader补格式兼容，保持strict=True。
+
+轻量数据manifest与报告提交Git；原始数据不复制，runs/预训练与下游权重/预测PNG全部忽略。报告包含完整环境、来源、split、协议与实际GPU成本。本轮仅完成这一模型和数据集。
+
+---
+
+以下为原作者README（保留引用与使用说明）。
+
 # DSeq-JEPA: Discriminative Sequential Joint-Embedding Predictive Architecture <br><sub>Official PyTorch Implementation</sub>
 
 [![arXiv](https://img.shields.io/badge/arXiv%20paper-2406.11838-b31b1b.svg)](https://arxiv.org/abs/2511.17354)&nbsp;

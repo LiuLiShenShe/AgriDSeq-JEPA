@@ -46,7 +46,7 @@ def slide_inference(model, img, num_classes, crop_size=512, stride=341, use_bflo
             pad_h, pad_w = crop_size - crop.shape[2], crop_size - crop.shape[3]
             if pad_h > 0 or pad_w > 0:
                 crop = F.pad(crop, (0, max(0, pad_w), 0, max(0, pad_h)))
-            with torch.amp.autocast("cuda", enabled=use_bfloat16):
+            with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=use_bfloat16):
                 crop_logits = model(crop)
             crop_logits = crop_logits.float()[:, :, :y2 - y1, :x2 - x1]
             logits[:, :, y1:y2, x1:x2] += crop_logits
@@ -203,7 +203,7 @@ def main(params, args):
         images = images.to(device, non_blocking=True)
         labels = labels.to(device, non_blocking=True)
 
-        with torch.amp.autocast("cuda", enabled=use_bfloat16):
+        with torch.amp.autocast("cuda", dtype=torch.bfloat16, enabled=use_bfloat16):
             logits, aux_logits = model(images)
             loss_main = F.cross_entropy(logits, labels, ignore_index=IGNORE_INDEX)
             loss_aux = F.cross_entropy(aux_logits, labels, ignore_index=IGNORE_INDEX)

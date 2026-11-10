@@ -223,7 +223,16 @@ def load_jepa_target_encoder_weights(
     strict: bool = True,
 ):  
     checkpoint = torch.load(checkpoint_path, map_location=map_device, weights_only=False)
-    target_encoder_ckpt = checkpoint['target_encoder'] if 'target_encoder' in checkpoint else checkpoint['encoder']
+    if 'target_encoder' in checkpoint:
+        target_encoder_ckpt = checkpoint['target_encoder']
+    elif 'encoder' in checkpoint:
+        target_encoder_ckpt = checkpoint['encoder']
+    elif checkpoint and all(isinstance(v, torch.Tensor) for v in checkpoint.values()):
+        # The author's public dseqjepa_vit_base_latest.pth is a bare encoder
+        # state_dict. Keep the downloaded file intact and load it strictly.
+        target_encoder_ckpt = checkpoint
+    else:
+        raise ValueError('Checkpoint does not contain an encoder state_dict')
     
     if "module." in list(target_encoder_ckpt.keys())[0]:
         # Remove 'module.' prefix if present (from DDP training)

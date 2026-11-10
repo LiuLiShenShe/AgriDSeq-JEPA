@@ -1,0 +1,76 @@
+{
+  "status": "OFFICIAL_CHECKPOINT_DOWNLOADED_CPU_ARCHITECTURE_STRICT_LOAD_PASSED",
+  "retrieved_at": "2026-11-10T03:19:39.387114+00:00",
+  "upstream_sha": "123082374389f78e4516157187681f9d5edb4310",
+  "source_folder": "https://drive.google.com/drive/folders/1a6HA5BKXohARqpP6BrRqgQhbWxyRFSJG?usp=sharing",
+  "source_folder_vitb_file_id": "1CjueAvk52g5YIf30yI7ZFDIbsfqYq5tt",
+  "source_download": "https://drive.google.com/uc?export=download&id=1CjueAvk52g5YIf30yI7ZFDIbsfqYq5tt",
+  "download_redirect": "https://drive.usercontent.google.com/download?id=1CjueAvk52g5YIf30yI7ZFDIbsfqYq5tt&export=download&confirm=t",
+  "download_method": "curl; fetched real virus scan confirmation form and followed its action and hidden fields",
+  "filename": "dseqjepa_vit_base_latest.pth",
+  "path": "/fj/AgriDSeq-JEPA/runs/pretrained/dseqjepa_vit_base_latest.pth",
+  "bytes": 343239900,
+  "drive_directory_metadata_bytes": 343239900,
+  "sha256": "3e3ca279c9a4929bfb66c10c3a21f92a702899bb556cda9e528ee57e72a2cc5e",
+  "checkpoint_format": "bare tensor state_dict, not encoder/target_encoder envelope",
+  "tensor_count": 150,
+  "parameter_and_buffer_elements": 85797888,
+  "shapes": {
+    "pos_embed": [
+      1,
+      196,
+      768
+    ],
+    "cls_token": [
+      1,
+      1,
+      768
+    ],
+    "patch_embed.proj.weight": [
+      768,
+      3,
+      16,
+      16
+    ],
+    "blocks.11.attn.qkv.weight": [
+      2304,
+      768
+    ],
+    "norm.weight": [
+      768
+    ]
+  },
+  "config_model": {
+    "model_name": "vit_base",
+    "patch_size": 16,
+    "crop_size": 224,
+    "use_masked_vit": true,
+    "use_class_token": true
+  },
+  "config_evidence": [
+    {
+      "path": "configs/dseqjepa/vitb16_in1k.yaml",
+      "finding": "mask.patch_size=16; data.augmentation.crop_size=224; framework.model.name=vit_base; framework.model.use_class_token=True"
+    },
+    {
+      "path": "src/frameworks/dseqjepa/pretrain.py:179",
+      "finding": "init_model(...,use_masked_vit=True) explicitly hardcoded for this official framework"
+    },
+    {
+      "url": "https://arxiv.org/html/2511.17354",
+      "finding": "paper appendix says auxiliary class token appended to both context and target encoders"
+    }
+  ],
+  "provenance_limitations": "Published file contains no epoch/optimizer/config metadata. Official YAML declares train_subset_file meta/in1k_subset10.0%_seed0_train.txt and epochs600, but those do not prove the downloaded weights were trained on exactly that subset/epoch. Do not claim full-ImageNet or epoch600 as file-verified.",
+  "official_loader_issue": "load_jepa_target_encoder_weights currently selects checkpoint[target_encoder] else checkpoint[encoder]; bare author state_dict needs minimal format compatibility branch, then strict=True. Do not transform or fabricate checkpoint.",
+  "search_status": "Bocha returned HTTP403 You do not have enough money or package quota (parent verified); direct official sources fetched successfully.",
+  "gpu_forward_status": "not executed by research child; parent responsible for actual 512x512 four-layer UPerNet forward",
+  "cpu_strict_load": {
+    "test": "init_target_encoder(cpu,patch_size=16,model_name=vit_base,crop_size=224,use_masked_vit=True,use_class_token=True); encoder.load_state_dict(raw_state,strict=True)",
+    "result": "All keys matched successfully",
+    "architecture": "MaskedVisionTransformer",
+    "embed_dim": 768,
+    "block_count": 12,
+    "runtime": "read-only use of existing old project .venv for CPU inspection; no environment mutations; does not validate parent new venv or GPU forward"
+  }
+}
