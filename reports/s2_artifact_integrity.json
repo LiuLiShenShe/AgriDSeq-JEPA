@@ -1,0 +1,95 @@
+{
+  "frozen_tracked_files": {
+    "configs/agriculture/phenobench_dseqjepa_vitb16_upernet.yaml": "5ac2b39067aaaad3163bacb80003a5f670bcc8908b0cbc4025622df2645d6c8c",
+    "reports/all_parameter_gradients_smoke.json": "63f236812ce1b79b7613164ae10e8eec6ef25358d6a552e7e11d6b62bd5fbfb3",
+    "reports/checkpoint_source.json": "11b3494cd1d755229ef6ecbcaca99b0371ba0607d4c85926f9c1f5713a8e8192",
+    "reports/phenobench_data_summary.json": "d8ca3f44c7878a13bdac262015a78af6049a0d673fab313d918ece9edd4cc4a4",
+    "reports/phenobench_train_val_manifest.csv": "6ce0232f323c1bf055f4b6f588872ca5605ae964bb26a541109780e63d307f3b",
+    "reports/published_baselines_val.json": "80b3dbc542ccb3bddf0d224717fc94f647f7f9c2f21c4916a1188764a28f40df",
+    "reports/published_baselines_val.md": "fcca1056696cfc28f8ec52f141b782a9fc533f35301b9c8649a52d3b7121c698",
+    "reports/s0_checkpoint_verification.md": "5b314f8ee471aa2ed58f291747153382c9fb20b811363e8bb94b45ac967e800c",
+    "reports/s0_environment_and_upstream.md": "54a466829bc3f62ec109bcf79a59b1fcdae98c0abb78b72569117b300c95929b",
+    "reports/s0_phenobench_data.md": "e48f3ae2d624041f1a122840cacf06d748503aa89051052640f15cb2b84b1868",
+    "reports/s1_agricultural_error_analysis.md": "f76a64692d4f0d80791e857e10e64025e2f7bdc1355345e08a03ac2237e86312",
+    "reports/s1_checkpoint_manifest.json": "d3f62d7f0cf10e1f86fdf1ee33a166f5d698eee28c6a77256850e5ff4cf78572",
+    "reports/s1_checkpoint_state_10000.json": "b7d3ee5a68d575471d843fb5cbe0137e20220b42c945166b3aff71b713520f26",
+    "reports/s1_checkpoint_state_5000.json": "267e11645e6fa5e94b33fa1254ab49d84aac7398ebd1d99f555b4e6ee25c3bd5",
+    "reports/s1_confusion_crosscheck.json": "09e594d2bbc1fc9ea566d6eb3139675492fbae6cd914407357039ccddeb2d11e",
+    "reports/s1_error_summary.json": "eb90a3c36dae624e6066939b67c1b3958cdd1d2c1ffdafedb30b9ff8b4e77362",
+    "reports/s1_evaluation_provenance.json": "3df78b3033ad9acb90fdd2c43d93bfe6a6c62a8ea1cd1e115cfbd53a8959ded9",
+    "reports/s1_final_report.md": "47a0a33d663c96a4e78ec0d1e01ba493c343bae9ca77c93729e8583ded87b467",
+    "reports/s1_final_verification.json": "eca8653e75018da294ac3226896bea163d2181148e76cad55c0c1a34e5de56c4",
+    "reports/s1_gpu_compute.md": "af036881816217da1363d3417a0443f3f8401582eff71a478a201aec0ff85a41",
+    "reports/s1_gradient_evidence.json": "d2e27dfeb6da98b273a5f465dad39b65623e3327a0205953d638139a37c7777f",
+    "reports/s1_intermediate_error_cases.md": "208d6851c0dd03f0ea097024a6d2e97426ad97bfa01ffce040e96fd732128126",
+    "reports/s1_official_metrics.json": "c012c43086245341df3dd04ab04457de698414151f9476a722c930c9c929d916",
+    "reports/s1_per_image_errors.csv": "433314738e980b8cdc6345c514830ce027a987ec703cb3220c5d92da6310dc11",
+    "reports/s1_phenobench_results.md": "d5ef616b3bb0d00c0e37ffc109b20980caeefc456996cefd1130914c780033c1",
+    "reports/s1_run_provenance.json": "b0de529ec2ea0abce62dc3a42f8594180db20abb3f221c51fd1313b5bb663502",
+    "reports/s1_runtime_events.md": "3ff397d42e35d859cf59360437ebe5a7c88ebae7f78e94d8ec262949f2b6bd0b",
+    "reports/s1_train_log_sample.csv": "bf7eefabac5f0787a829ccdb05fed9fc83075f754c077b58e41e0fd58f849975",
+    "reports/s1_training_protocol.md": "11d35d92ac9ff2b6b734898bae4c3efc27cbf2ab32bdbe65c9a6054c12d84ff0",
+    "reports/s1_val_log.csv": "2bb94cf729d402456060d9f00a4d87500fbc2fdd553534afddd977b8920be1b8",
+    "reports/smoke_resume_verification.json": "a86c9d1e9544d756ea88013b751af4510203fde9f915a248aa79b71b1b9b4c5a",
+    "reports/smoke_verification.json": "24e88cd9c740405d61adb02b93506ba0cc5863fadcb42e0eb33b0f89eb4c4603"
+  },
+  "s1_checkpoint_checks": [
+    {
+      "file": "runs/phenobench_dseq_vitb16_s20261110/checkpoints/phenobench_upernet_best.pth",
+      "bytes": 1522024148,
+      "sha256": "369bf00fb1038264cc51fade08260810a303b987903408de3531b7a10840128c"
+    },
+    {
+      "file": "runs/phenobench_dseq_vitb16_s20261110/checkpoints/phenobench_upernet_latest.pth",
+      "bytes": 1522025834,
+      "sha256": "a2cd537b87e1c717bf53cfe7203fd3b3500286acadc085495ec90a9c507c7a8e"
+    },
+    {
+      "file": "runs/phenobench_dseq_vitb16_s20261110/checkpoints/phenobench_upernet_step01000.pth",
+      "bytes": 1522025834,
+      "sha256": "38367a870a89e4fc803a94f4cc1d88a142460d8b6fd01ddc962e639e629d9162"
+    },
+    {
+      "file": "runs/phenobench_dseq_vitb16_s20261110/checkpoints/phenobench_upernet_step05000.pth",
+      "bytes": 1522025834,
+      "sha256": "0f45adda9af0a83174410c58ce61b5c840c28ebc81302b27e54ea0026e881d55"
+    },
+    {
+      "file": "runs/phenobench_dseq_vitb16_s20261110/checkpoints/phenobench_upernet_step10000.pth",
+      "bytes": 1522025834,
+      "sha256": "02d84e80ff66ba3dfa4bf49365d5a6c729f7ddd3e43beea337c310f09b650ccd"
+    }
+  ],
+  "pretrained_checks": [
+    {
+      "file": "runs/pretrained/dseqjepa_vit_base_latest.pth",
+      "bytes": 343239900,
+      "sha256": "3e3ca279c9a4929bfb66c10c3a21f92a702899bb556cda9e528ee57e72a2cc5e"
+    },
+    {
+      "file": "runs/pretrained/mae_pretrain_vit_base.pth",
+      "bytes": 343249461,
+      "sha256": "aec5f0b68e5f3193a00b07bc65a37440db549c15b36b8bea242606cc40c4bc5d"
+    }
+  ],
+  "s1_local_branch_sha": "20ffaadcfa0f1172303c2ccbc09a456458f80e3d",
+  "s1_live_remote_refs": [
+    "20ffaadcfa0f1172303c2ccbc09a456458f80e3d\tHEAD",
+    "20ffaadcfa0f1172303c2ccbc09a456458f80e3d\trefs/heads/agri-phenobench-transfer"
+  ],
+  "s2_predictions": {
+    "count": 772,
+    "resolution": [
+      1024,
+      1024
+    ],
+    "dtype": "uint8",
+    "class_ids": [
+      0,
+      1,
+      2
+    ],
+    "exact_val_members": true
+  },
+  "frozen_s1_preserved": true
+}

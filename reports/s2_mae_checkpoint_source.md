@@ -3,7 +3,7 @@
 实时核对 MAE 官方远端 HEAD：`efb2a8062c206524e35e47d04501ed4f544c0ae8`。
 [官方固定 SHA README](https://github.com/facebookresearch/mae/blob/efb2a8062c206524e35e47d04501ed4f544c0ae8/README.md) 的 pre-trained ViT-Base 下载链接指向本次文件。
 [官方原始自监督预训练权重](https://dl.fbaipublicfiles.com/mae/pretrain/mae_pretrain_vit_base.pth)，没有使用 ImageNet 分类微调权重。
-本地全服务器可读路径检索未发现该文件，使用 curl 从官方地址下载，原文件保留于 `runs/pretrained/mae_pretrain_vit_base.pth`。
+开始时检查目标pretrained目录，并检索 `/fj` 可读目录，未发现该文件；使用 curl 从官方地址下载，原文件保留于 `runs/pretrained/mae_pretrain_vit_base.pth`。
 
 实际大小 **343,249,461 bytes**；完整 SHA-256 **`aec5f0b68e5f3193a00b07bc65a37440db549c15b36b8bea242606cc40c4bc5d`**。
 顶层只有 `model`，内部150个FP32 encoder张量：patch embedding2、CLS1、pos1、12 blocks×12、final norm2。

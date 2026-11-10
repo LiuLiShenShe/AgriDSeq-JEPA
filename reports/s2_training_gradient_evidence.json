@@ -1,0 +1,18 @@
+{
+  "backbone": {
+    "gradient_norm": 3.5611140727996826,
+    "max_abs_update": 1.1470168828964233e-05
+  },
+  "decoder": {
+    "gradient_norm": 6.853447914123535,
+    "max_abs_update": 1.2897886335849762e-05
+  },
+  "auxiliary": {
+    "gradient_norm": 1.9238930940628052,
+    "max_abs_update": 1.3016164302825928e-05
+  },
+  "neck": {
+    "gradient_norm": 0.22438699007034302,
+    "max_abs_update": 1.3059936463832855e-05
+  }
+}

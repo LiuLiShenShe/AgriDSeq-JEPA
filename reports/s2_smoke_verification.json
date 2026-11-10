@@ -1,7 +1,24 @@
 {
   "step": 20,
   "restore": true,
-  "gradients": {},
+  "gradients": {
+    "backbone": {
+      "gradient_norm": 3.562274217605591,
+      "max_abs_update": 2.6114284992218018e-06
+    },
+    "decoder": {
+      "gradient_norm": 6.853447914123535,
+      "max_abs_update": 3.03611159324646e-06
+    },
+    "auxiliary": {
+      "gradient_norm": 1.9238930940628052,
+      "max_abs_update": 3.03611159324646e-06
+    },
+    "neck": {
+      "gradient_norm": 0.22438858449459076,
+      "max_abs_update": 3.061348252231255e-06
+    }
+  },
   "one_val_prediction": {
     "soil": 94.92037318206319,
     "crop": 26.098517582928938,
@@ -60,5 +77,6 @@
     "_step": 20
   },
   "resume_from_optimizer_update": 10,
-  "actual_initialization_matches_s1_reconstruction": true
+  "actual_initialization_matches_s1_reconstruction": true,
+  "gradient_evidence_optimizer_updates": "first 10 updates of the same resumed 20-update smoke"
 }

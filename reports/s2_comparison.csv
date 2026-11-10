@@ -1,0 +1,5 @@
+metric,DSeq_JEPA,MAE,DSeq_minus_MAE_pp
+soil,99.47,99.47,0.0
+crop,95.97,95.89,0.08
+weed,74.62,73.18,1.44
+mIoU,90.02,89.51,0.51

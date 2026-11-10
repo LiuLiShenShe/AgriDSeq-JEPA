@@ -1,0 +1,73 @@
+{
+  "totals": {
+    "both_wrong": 3505028,
+    "dseq_only_wrong": 603190,
+    "mae_only_wrong": 666884,
+    "disagree": 1295085,
+    "both_weed_false_negative": 657306,
+    "dseq_only_weed_false_negative": 81748,
+    "mae_only_weed_false_negative": 181791
+  },
+  "weed_confusions": {
+    "weed_as_soil": {
+      "DSeq": 547960,
+      "MAE": 587001
+    },
+    "weed_as_crop": {
+      "DSeq": 191094,
+      "MAE": 252096
+    }
+  },
+  "selected_images": [
+    "05-15_00202_P0030953.png",
+    "05-15_00253_P0030792.png",
+    "05-15_00220_P0030686.png",
+    "05-26_00242_P0034016.png",
+    "06-05_00145_P0037991.png",
+    "06-05_00166_P0037991.png",
+    "06-05_00100_P0037991.png",
+    "06-05_00051_P0037822.png"
+  ],
+  "small_crops": [
+    {
+      "filename": "06-05_00051_P0037822.png",
+      "component_area_pixels": 58,
+      "crop_box": [
+        208,
+        694,
+        464,
+        950
+      ],
+      "component_bounds_original": [
+        334,
+        815,
+        341,
+        830
+      ],
+      "dseq_covered_pixels": 14,
+      "mae_covered_pixels": 15
+    },
+    {
+      "filename": "06-05_00100_P0037991.png",
+      "component_area_pixels": 57,
+      "crop_box": [
+        768,
+        537,
+        1024,
+        793
+      ],
+      "component_bounds_original": [
+        1013,
+        661,
+        1023,
+        670
+      ],
+      "dseq_covered_pixels": 0,
+      "mae_covered_pixels": 0
+    }
+  ],
+  "images_with_shared_wrong_pixels": 772,
+  "images_with_shared_weed_false_negatives": 738,
+  "weed_present_image_count": 738,
+  "weed_IoU_per_image_pearson": 0.9275029263442038
+}

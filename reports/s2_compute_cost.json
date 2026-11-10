@@ -1,0 +1,13 @@
+{
+  "training_and_periodic_val_seconds": 16232.47045386897,
+  "final_best_evaluation_seconds": 406.73394083301537,
+  "mean_optimizer_update_seconds": 1.2499551069122972,
+  "mean_updates_1_to_4000_seconds": 0.8895340314148634,
+  "mean_updates_4001_to_10000_seconds": 1.4902358239105864,
+  "peak_allocated_gib": 3.5213818550109863,
+  "peak_reserved_gib": 3.79296875,
+  "device_peak_memory_mib": 47520.875,
+  "sensor_interval_seconds": 16680.850793600082,
+  "device_energy_kwh": 1.1774441458405458,
+  "device_peak_temperature_c": 89.0
+}
