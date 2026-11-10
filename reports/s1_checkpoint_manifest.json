@@ -2,16 +2,21 @@
   {
     "file": "phenobench_upernet_best.pth",
     "bytes": 1522024148,
-    "sha256": "438d94b0a219af1ba0fb5f42016e1189b35da5c250b9a23baaafef3a59f85c30"
+    "sha256": "200226e95a815d26c69e61c672f7b3ec198956af5ce1228b22f5ee9221c83a80"
   },
   {
     "file": "phenobench_upernet_latest.pth",
     "bytes": 1522025834,
-    "sha256": "fd892834c1c18851830da8358e6cacfb1d98681b10e14321df2f711e3f7b632e"
+    "sha256": "38da6b4be05c2c598d14920809dcf9c4fd9ea22b5fe072c9c36c6345a0da2fa1"
   },
   {
     "file": "phenobench_upernet_step01000.pth",
     "bytes": 1522025834,
     "sha256": "38367a870a89e4fc803a94f4cc1d88a142460d8b6fd01ddc962e639e629d9162"
+  },
+  {
+    "file": "phenobench_upernet_step05000.pth",
+    "bytes": 1522025834,
+    "sha256": "0f45adda9af0a83174410c58ce61b5c840c28ebc81302b27e54ea0026e881d55"
   }
 ]
