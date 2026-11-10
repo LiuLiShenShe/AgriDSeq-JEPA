@@ -128,13 +128,16 @@ def main():
     data = config['data']
     if sha256(data['manifest_path']) != data['manifest_sha256']:
         raise ValueError('Fixed data manifest SHA-256 mismatch')
-    (run/'provenance.json').write_text(json.dumps(dict(
+    provenance = dict(
         git_commit=subprocess.check_output(['git','rev-parse','HEAD'],text=True).strip(),
         config_sha256=sha256(args.config), pretrained_sha256=config['model']['pretrained_sha256'],
         data_manifest_sha256=data['manifest_sha256'], original_zip_sha256=data['original_zip_sha256'],
         cuda_visible_devices=os.environ['CUDA_VISIBLE_DEVICES'],
         device_name=torch.cuda.get_device_name(device), torch=torch.__version__,
-        cuda=torch.version.cuda), indent=2))
+        cuda=torch.version.cuda)
+    # A final evaluation must preserve the training launch provenance.
+    if args.mode != 'eval':
+        (run/'provenance.json').write_text(json.dumps(provenance, indent=2))
     common = dict(dataset_name='phenobench', root_path=data['root_path'], crop_size=512,
                   base_size=data['base_size'], ratio_range=data['ratio_range'], test_scale=None,
                   num_workers=data['num_workers'], pin_mem=data['pin_memory'], seed=seed)
@@ -162,11 +165,16 @@ def main():
     if args.mode == 'eval':
         if not args.checkpoint:
             raise ValueError('--checkpoint required for evaluation')
+        eval_start = time.monotonic()
         state = restore(args.checkpoint, model)
         predictions = run / 'predictions' / 'val'
         cross = evaluate(model, val_ds, device, predictions, config['logging']['eval']['slide_stride'])
         official = official_metrics(val_ds, predictions, run / 'metrics')
         (run / 'metrics' / 'confusion_crosscheck.json').write_text(json.dumps(cross, indent=2))
+        (run / 'metrics' / 'evaluation_provenance.json').write_text(json.dumps(dict(
+            **provenance, checkpoint=str(args.checkpoint), checkpoint_sha256=sha256(args.checkpoint),
+            selected_optimizer_updates=state['step'], prediction_count=len(val_ds),
+            original_resolution=[1024, 1024], elapsed_seconds=time.monotonic()-eval_start), indent=2))
         print(json.dumps(dict(step=state['step'], official=official, crosscheck=cross)), flush=True)
         return
     opt = config['opt']; lr = opt['lr']

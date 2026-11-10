@@ -30,13 +30,16 @@ status = json.loads((run/'status.json').read_text()) if (run/'status.json').exis
 metrics_file=run/'metrics'/'phenobench_official.json'
 metrics=json.loads(metrics_file.read_text()) if metrics_file.exists() else {}
 analysis=json.loads((run/'analysis'/'summary.json').read_text()) if (run/'analysis'/'summary.json').exists() else {}
+eval_provenance=json.loads((run/'metrics'/'evaluation_provenance.json').read_text()) if (run/'metrics'/'evaluation_provenance.json').exists() else {}
 best = max(val, key=lambda r:float(r['mIoU'])) if val else {}
 for source, target in [(run/'val_log.csv',reports/'s1_val_log.csv'),
                        (run/'gradient_evidence.json',reports/'s1_gradient_evidence.json'),
                        (run/'provenance.json',reports/'s1_run_provenance.json'),
                        (run/'metrics'/'phenobench_official.json',reports/'s1_official_metrics.json'),
                        (run/'metrics'/'confusion_crosscheck.json',reports/'s1_confusion_crosscheck.json'),
-                       (run/'analysis'/'summary.json',reports/'s1_error_summary.json')]:
+                       (run/'metrics'/'evaluation_provenance.json',reports/'s1_evaluation_provenance.json'),
+                       (run/'analysis'/'summary.json',reports/'s1_error_summary.json'),
+                       (run/'analysis'/'per_image_errors.csv',reports/'s1_per_image_errors.csv')]:
     if source.exists(): shutil.copyfile(source,target)
 if train:
     with (reports/'s1_train_log_sample.csv').open('w',newline='') as f:
@@ -64,6 +67,7 @@ mean_update=float(np.mean([float(r['update_seconds']) for r in train])) if train
 训练allocator峰值 {peak_alloc:.4f}GiB，reserved峰值 {peak_reserved:.4f}GiB；NVML监控峰值 {peak_nvml:.1f}MiB。
 10s采样遥测区间 {sensor_seconds:.2f}s，GPU板卡功率梯形积分 {energy:.5f}kWh。初始GPU1空闲，但训练期间另有用户任务启动，设备显存/功率含其他进程，不能全部归因于本实验，也不含整机CPU/磁盘能耗或代表电费账单。PyTorch allocator峰值属于本任务。遥测开始于正式训练约170秒后；不外推缺失区间功耗。实测设备温度峰值{peak_temperature:.1f}°C。遥测原始CSV在Git忽略的run中。
 烟雾工程检查另行记录reports/smoke_verification.json和smoke_resume_verification.json，不计正式10kupdates。最终best重新评价计入持续遥测区间，训练status耗时终点为训练完成。
+最终best恢复、全772张预测和官方评价另耗时 {float(eval_provenance.get('elapsed_seconds',0)):.2f}s；评价checkpoint和执行代码SHA见s1_evaluation_provenance.json（生成后）。
 
 来源：实际train_log.csv、status.json、gpu_telemetry.csv；没有估算未执行的更新。
 ''')
