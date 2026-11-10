@@ -1,15 +1,16 @@
 # S1 PhenoBench正式验证结果
 
-真实状态：TRAINING_IN_PROGRESS；已完成 2147/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
+真实状态：TRAINING_IN_PROGRESS；已完成 3122/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
 
 | optimizer updates | Soil IoU | Crop IoU | Weed IoU | mIoU |
 |---:|---:|---:|---:|---:|
 | 1000 | 99.3 | 93.53 | 45.35 | 79.39 |
 | 2000 | 99.38 | 94.76 | 58.98 | 84.37 |
+| 3000 | 99.43 | 95.45 | 69.57 | 88.15 |
 
 
 最终恢复best-val并重新导出全部772张1024×1024PNG的官方结果：尚未完成最终best-val重新导出和官方评价。
-best选择步数 2000，按官方val mIoU选择，不是独立test。
+best选择步数 3000，按官方val mIoU选择，不是独立test。
 原始预测路径 `runs/phenobench_dseq_vitb16_s20261110/predictions/val/semantics/*.png`；权重与PNG不提交Git。官方CLI及官方函数返回JSON保存在run/metrics。
 交叉confusion核对结果见reports/s1_confusion_crosscheck.json（若已生成）；正式指标以官方devkit为准。
 
