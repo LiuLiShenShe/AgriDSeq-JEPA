@@ -9,3 +9,5 @@
 运行期间GPU1有其他科研任务。本任务不终止其他进程；NVML设备总显存、功率及积分能耗不能全部归因于本任务，PyTorch allocator峰值独立记录。
 
 来源：本机/proc进程和磁盘状态、nvidia-smi、run/console.log、run/gpu_telemetry.csv，以及s1_checkpoint_state_10000.json。
+
+最终原训练子进程自然退出，status.json记录TRAINING_COMPLETE、10000updates、训练及周期验证12155.9408s。随后独立恢复best(step10000)，全部772张预测重新生成，官方mIoU90.02%，与周期结果及confusion交叉核对一致。该独立评价实际耗时2233.4019s，期间同样有间歇性I/O等待。CPU误差分析完成后，仅停止本项目专属GPU遥测进程PID3340613，未终止其他科研任务。

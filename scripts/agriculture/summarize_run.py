@@ -68,6 +68,7 @@ mean_update=float(np.mean([float(r['update_seconds']) for r in train])) if train
 10s采样遥测区间 {sensor_seconds:.2f}s，GPU板卡功率梯形积分 {energy:.5f}kWh。初始GPU1空闲，但训练期间另有用户任务启动，设备显存/功率含其他进程，不能全部归因于本实验，也不含整机CPU/磁盘能耗或代表电费账单。PyTorch allocator峰值属于本任务。遥测开始于正式训练约170秒后；不外推缺失区间功耗。实测设备温度峰值{peak_temperature:.1f}°C。遥测原始CSV在Git忽略的run中。
 烟雾工程检查另行记录reports/smoke_verification.json和smoke_resume_verification.json，不计正式10kupdates。最终best重新评价计入持续遥测区间，训练status耗时终点为训练完成。
 最终best恢复、全772张预测和官方评价另耗时 {float(eval_provenance.get('elapsed_seconds',0)):.2f}s；评价checkpoint和执行代码SHA见s1_evaluation_provenance.json（生成后）。
+训练及最终评价合计 {(elapsed+float(eval_provenance.get('elapsed_seconds',0))):.2f}s ({(elapsed+float(eval_provenance.get('elapsed_seconds',0)))/3600:.4f}任务运行小时)。控制会话与存储等待的实际记录见s1_runtime_events.md，未追加或重启训练。
 
 来源：实际train_log.csv、status.json、gpu_telemetry.csv；没有估算未执行的更新。
 ''')
@@ -99,6 +100,7 @@ best选择步数 {best.get('optimizer_updates','未产生')}，按官方val mIoU
 
 农业辅助指标：Weed precision {analysis.get('weed_precision','未计算')}%，recall {analysis.get('weed_recall','未计算')}%；面积<=100px且至少50%像素识别的4连接weed组件召回 {analysis.get('small_component_recall_100px','未计算')}%。这些是辅助度量，不替代官方IoU。
 具体错误成员与数值见reports/s1_error_summary.json，局部可视化在run/analysis，主观失败类型应以直接看图描述为准。
+直接查看最终真实RGB/GT/预测后的农业案例分析见[s1_agricultural_error_analysis.md](s1_agricultural_error_analysis.md)。
 官方baseline同val公开预测参照见reports/published_baselines_val.md（若存在）；论文TableIII为test，不能声称val相对test提升。
 
 {baseline_table}
@@ -108,7 +110,7 @@ best选择步数 {best.get('optimizer_updates','未产生')}，按官方val mIoU
 来源：[固定官方评价实现](https://github.com/PRBonn/phenobench/blob/0edc128ef7f67c8c6577554c7d1a2e382e2ea81f/src/phenobench/evaluation/evaluate_semantics.py)，本项目实际val日志与预测。
 ''')
 checkpoint_text='\n'.join(f'- {c["file"]}: {c["bytes"]} bytes, SHA256 `{c["sha256"]}`' for c in checkpoints) or '尚未保存正式checkpoint。'
-(reports/'s1_final_report.md').write_text(f'''# S0–S1 最终/实时报告
+(reports/'s1_final_report.md').write_text(f'''# S0–S1 {'完成报告' if metrics and status['status']=='TRAINING_COMPLETE' else '进度报告'}
 
 当前状态 **{status['status']}**；正式完成 **{updates}/10000 optimizer updates**。只有TRAINING_COMPLETE且最终772官方评价已生成才满足完整训练验收。
 
@@ -122,7 +124,7 @@ checkpoint_text='\n'.join(f'- {c["file"]}: {c["bytes"]} bytes, SHA256 `{c["sha25
 {checkpoint_text}
 
 7. 最终772val官方指标：{metric_text}。best-val选择步数{best.get('optimizer_updates','未产生')}。
-8. 农业失败数值见s1_error_summary.json与s1_phenobench_results.md；{delta_text}。baseline协议不同，不能将差值单独归因于JEPA，也不能以本轮val对公开test宣称胜出。
+8. 主要失败为小杂草漏分成soil、相邻/交叠叶片处weed被并入crop、局部叶缘错误；数值及真实成员见s1_agricultural_error_analysis.md与s1_error_summary.json；{delta_text}。baseline协议不同，不能将差值单独归因于JEPA，也不能以本轮val对公开test宣称胜出。
 9. 当前协议验证后优先MAE ViT-B/16公平对照：先固定同backbone容量、head、crop、updates和effectivebatch，判断JEPA初始化的贡献；外部CropAndWeed验证留后续阶段。该建议不意味着本轮已启动任何新对照。
 
 许可证/环境/复用：s0_environment_and_upstream.md；固定协议：s1_training_protocol.md；README有真实训练、恢复、评价命令。

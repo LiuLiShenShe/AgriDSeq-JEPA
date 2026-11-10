@@ -1,6 +1,6 @@
 # S1 PhenoBench正式验证结果
 
-真实状态：TRAINING_IN_PROGRESS；已完成 9185/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
+真实状态：TRAINING_COMPLETE；已完成 10000/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
 
 | optimizer updates | Soil IoU | Crop IoU | Weed IoU | mIoU |
 |---:|---:|---:|---:|---:|
@@ -13,24 +13,26 @@
 | 7000 | 99.46 | 95.86 | 73.47 | 89.6 |
 | 8000 | 99.47 | 95.94 | 73.67 | 89.69 |
 | 9000 | 99.48 | 95.98 | 74.41 | 89.96 |
+| 10000 | 99.47 | 95.97 | 74.62 | 90.02 |
 
 
-最终恢复best-val并重新导出全部772张1024×1024PNG的官方结果：尚未完成最终best-val重新导出和官方评价。
-best选择步数 9000，按官方val mIoU选择，不是独立test。
+最终恢复best-val并重新导出全部772张1024×1024PNG的官方结果：soil=99.47%, crop=95.97%, weed=74.62%, mIoU=90.02%。
+best选择步数 10000，按官方val mIoU选择，不是独立test。
 原始预测路径 `runs/phenobench_dseq_vitb16_s20261110/predictions/val/semantics/*.png`；权重与PNG不提交Git。官方CLI及官方函数返回JSON保存在run/metrics。
 交叉confusion核对结果见reports/s1_confusion_crosscheck.json（若已生成）；正式指标以官方devkit为准。
 
-农业辅助指标：Weed precision 未计算%，recall 未计算%；面积<=100px且至少50%像素识别的4连接weed组件召回 未计算%。这些是辅助度量，不替代官方IoU。
+农业辅助指标：Weed precision 88.40151171745957%，recall 82.71910353540372%；面积<=100px且至少50%像素识别的4连接weed组件召回 44.827586206896555%。这些是辅助度量，不替代官方IoU。
 具体错误成员与数值见reports/s1_error_summary.json，局部可视化在run/analysis，主观失败类型应以直接看图描述为准。
+直接查看最终真实RGB/GT/预测后的农业案例分析见[s1_agricultural_error_analysis.md](s1_agricultural_error_analysis.md)。
 官方baseline同val公开预测参照见reports/published_baselines_val.md（若存在）；论文TableIII为test，不能声称val相对test提升。
 
 | 方法（同772张val，原始1024坐标） | Soil IoU | Crop IoU | Weed IoU | mIoU |
 |---|---:|---:|---:|---:|
-| DSeq-JEPA当前best-val | 99.48% | 95.98% | 74.41% | 89.96% |
+| DSeq-JEPA当前best-val | 99.47% | 95.97% | 74.62% | 90.02% |
 | ERFNet | 99.33% | 95.34% | 68.65% | 87.77% |
 | DeepLabV3+ | 99.30% | 95.13% | 68.00% | 87.47% |
 
 
-相对ERFNet公开val预测重评：mIoU +2.19个百分点，Weed IoU +5.76个百分点。此表是同拆分参照：本方法经过val选择，baseline的backbone、训练crop、损失权重、优化协议和预算不同，因此差值不能单独归因于JEPA预训练。详细公开配置及下载/评价证据见published_baselines_val.md。
+相对ERFNet公开val预测重评：mIoU +2.25个百分点，Weed IoU +5.97个百分点。此表是同拆分参照：本方法经过val选择，baseline的backbone、训练crop、损失权重、优化协议和预算不同，因此差值不能单独归因于JEPA预训练。详细公开配置及下载/评价证据见published_baselines_val.md。
 
 来源：[固定官方评价实现](https://github.com/PRBonn/phenobench/blob/0edc128ef7f67c8c6577554c7d1a2e382e2ea81f/src/phenobench/evaluation/evaluate_semantics.py)，本项目实际val日志与预测。

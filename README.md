@@ -4,6 +4,8 @@
 
 当前真实完成进度与指标见 [最终阶段报告](reports/s1_final_report.md)。正式预算是seed20261110、单卡A6000、microbatch2×accum8=16、10000 optimizer updates；smoke不计入正式结果。
 
+本轮已实际完成10000 optimizer updates，并恢复step10000的best checkpoint重新导出全部772张1024×1024 val预测。官方Soil/Crop/Weed IoU为99.47%/95.97%/74.62%，mIoU90.02%；这是val选择结果。详见[正式结果](reports/s1_phenobench_results.md)、[农业失败案例](reports/s1_agricultural_error_analysis.md)及[实测成本](reports/s1_gpu_compute.md)。
+
 ```bash
 uv venv --python 3.11 .venv
 uv pip install --python .venv/bin/python -r configs/agriculture/requirements-lock.txt
@@ -22,6 +24,16 @@ bash scripts/agriculture/eval_phenobench.sh
 恢复使用train脚本的`--checkpoint <latest路径>`。禁止对已有run不带checkpoint重新启动；训练每1k评价全部772val，最终脚本恢复best再次导出完整1024×1024预测。soil/crop/weed为0/1/2，partial3→1/4→2，padding才255。官方devkit锁定SHA `0edc128ef7f67c8c6577554c7d1a2e382e2ea81f`；CLI不打印soil，由未修改的官方函数补全。正式指标优先官方评价，confusion只交叉核对。
 
 官方权重来源：[下载](https://drive.google.com/uc?export=download&id=1CjueAvk52g5YIf30yI7ZFDIbsfqYq5tt)，343239900bytes，SHA256 `3e3ca279c9a4929bfb66c10c3a21f92a702899bb556cda9e528ee57e72a2cc5e`。公开文件为裸state_dict，项目只为官方loader补格式兼容，保持strict=True。
+
+最终预测的CPU误差分析及轻量报告可重新生成：
+
+```bash
+CUDA_VISIBLE_DEVICES='' OMP_NUM_THREADS=4 PYTHONPATH=. \
+  .venv/bin/python scripts/agriculture/analyze_errors.py
+.venv/bin/python scripts/agriculture/summarize_run.py
+```
+
+完整下游权重的文件名、字节数和SHA见[checkpoint清单](reports/s1_checkpoint_manifest.json)，最终恢复来源见[评价追溯记录](reports/s1_evaluation_provenance.json)。正式训练和周期验证3.38小时、最终恢复评价37.22分钟；GPU共享及I/O等待的实际记录保留在报告中。
 
 轻量数据manifest与报告提交Git；原始数据不复制，runs/预训练与下游权重/预测PNG全部忽略。报告包含完整环境、来源、split、协议与实际GPU成本。本轮仅完成这一模型和数据集。
 

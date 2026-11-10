@@ -1,0 +1,40 @@
+{
+  "status": "S0_S1_COMPLETE",
+  "audited_at_utc": "2026-11-10T07:45:31.444134+00:00",
+  "optimizer_updates": 10000,
+  "train_rows": 10000,
+  "validation_rounds": 10,
+  "train_images_and_masks": 1407,
+  "val_predictions": 772,
+  "all_prediction_shapes": [
+    1024,
+    1024
+  ],
+  "prediction_ids": [
+    0,
+    1,
+    2
+  ],
+  "prediction_pixel_counts": [
+    728491864,
+    77007002,
+    4001806
+  ],
+  "prediction_counts_match_official_confusion": true,
+  "best_step": 10000,
+  "official_metrics_percent": {
+    "soil": 99.47,
+    "crop": 95.97,
+    "weed": 74.62,
+    "mIoU": 90.02
+  },
+  "optimizer_parameter_states": 199,
+  "checkpoint_milestones": [
+    1000,
+    5000,
+    10000
+  ],
+  "checkpoint_sha_matches_final_evaluation": true,
+  "committed_data_manifest_sha256": "6ce0232f323c1bf055f4b6f588872ca5605ae964bb26a541109780e63d307f3b",
+  "tracked_run_or_weight_files": []
+}
