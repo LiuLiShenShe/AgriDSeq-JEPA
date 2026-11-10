@@ -1,6 +1,6 @@
 # S1 PhenoBench正式验证结果
 
-真实状态：TRAINING_IN_PROGRESS；已完成 177/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
+真实状态：TRAINING_IN_PROGRESS；已完成 677/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
 
 | optimizer updates | Soil IoU | Crop IoU | Weed IoU | mIoU |
 |---:|---:|---:|---:|---:|
