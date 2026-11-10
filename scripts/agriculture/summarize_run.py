@@ -71,6 +71,17 @@ table='| optimizer updates | Soil IoU | Crop IoU | Weed IoU | mIoU |\n|---:|---:
 for row in val:
     table+='| '+' | '.join(row[k] for k in ('optimizer_updates','soil','crop','weed','mIoU'))+' |\n'
 metric_text=', '.join(f'{k}={v:.2f}%' for k,v in metrics.items()) if metrics else '尚未完成最终best-val重新导出和官方评价'
+comparison = metrics or {k:float(best[k]) for k in ('soil','crop','weed','mIoU') if k in best}
+baseline_table=''
+delta_text='尚无可比较的完整val结果'
+baseline_path=reports/'published_baselines_val.json'
+if baseline_path.exists() and comparison:
+    baselines=json.loads(baseline_path.read_text())['models']
+    baseline_table='| 方法（同772张val，原始1024坐标） | Soil IoU | Crop IoU | Weed IoU | mIoU |\n|---|---:|---:|---:|---:|\n'
+    for name,values in [('DSeq-JEPA当前best-val',comparison)]+[(n,b['official_metrics_percent']) for n,b in baselines.items()]:
+        baseline_table+='| '+name+' | '+' | '.join(f'{values[k]:.2f}%' for k in ('soil','crop','weed','mIoU'))+' |\n'
+    erf=baselines['ERFNet']['official_metrics_percent']
+    delta_text=f'相对ERFNet公开val预测重评：mIoU {comparison["mIoU"]-erf["mIoU"]:+.2f}个百分点，Weed IoU {comparison["weed"]-erf["weed"]:+.2f}个百分点'
 (reports/'s1_phenobench_results.md').write_text(f'''# S1 PhenoBench正式验证结果
 
 真实状态：{status['status']}；已完成 {updates}/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
@@ -85,6 +96,10 @@ best选择步数 {best.get('optimizer_updates','未产生')}，按官方val mIoU
 农业辅助指标：Weed precision {analysis.get('weed_precision','未计算')}%，recall {analysis.get('weed_recall','未计算')}%；面积<=100px且至少50%像素识别的4连接weed组件召回 {analysis.get('small_component_recall_100px','未计算')}%。这些是辅助度量，不替代官方IoU。
 具体错误成员与数值见reports/s1_error_summary.json，局部可视化在run/analysis，主观失败类型应以直接看图描述为准。
 官方baseline同val公开预测参照见reports/published_baselines_val.md（若存在）；论文TableIII为test，不能声称val相对test提升。
+
+{baseline_table}
+
+{delta_text}。此表是同拆分参照：本方法经过val选择，baseline的backbone、训练crop、损失权重、优化协议和预算不同，因此差值不能单独归因于JEPA预训练。详细公开配置及下载/评价证据见published_baselines_val.md。
 
 来源：[固定官方评价实现](https://github.com/PRBonn/phenobench/blob/0edc128ef7f67c8c6577554c7d1a2e382e2ea81f/src/phenobench/evaluation/evaluate_semantics.py)，本项目实际val日志与预测。
 ''')
@@ -103,7 +118,7 @@ checkpoint_text='\n'.join(f'- {c["file"]}: {c["bytes"]} bytes, SHA256 `{c["sha25
 {checkpoint_text}
 
 7. 最终772val官方指标：{metric_text}。best-val选择步数{best.get('optimizer_updates','未产生')}。
-8. 农业失败数值见s1_error_summary.json与s1_phenobench_results.md；baseline来源与协议差异单独记录，禁止以本轮val对公开test宣称胜出。
+8. 农业失败数值见s1_error_summary.json与s1_phenobench_results.md；{delta_text}。baseline协议不同，不能将差值单独归因于JEPA，也不能以本轮val对公开test宣称胜出。
 9. 当前协议验证后优先MAE ViT-B/16公平对照：先固定同backbone容量、head、crop、updates和effectivebatch，判断JEPA初始化的贡献；外部CropAndWeed验证留后续阶段。该建议不意味着本轮已启动任何新对照。
 
 许可证/环境/复用：s0_environment_and_upstream.md；固定协议：s1_training_protocol.md；README有真实训练、恢复、评价命令。
