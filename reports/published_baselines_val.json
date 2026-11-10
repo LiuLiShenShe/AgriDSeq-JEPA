@@ -1,0 +1,65 @@
+{
+  "split": "val",
+  "dataset_root": "/data/datasets/PhenoBench/PhenoBench-v110",
+  "dataset_version": "1.1.0",
+  "devkit_sha": "0edc128ef7f67c8c6577554c7d1a2e382e2ea81f",
+  "device": "CPU",
+  "models": {
+    "ERFNet": {
+      "source": "https://www.ipb.uni-bonn.de/html/projects/phenobench/semantic_segmentation/predictions/erfnet/erfnet-val.zip",
+      "archive": "/fj/AgriDSeq-JEPA/runs/published_baselines/erfnet-val.zip",
+      "download_bytes": 5721202,
+      "archive_sha256": "2e21129799861b2683a76028cfcc4e719b82dc183b02c408f4b49c4277dd6ada",
+      "prediction_count": 772,
+      "exact_filename_match": true,
+      "all_prediction_size": [
+        1024,
+        1024
+      ],
+      "prediction_ids": [
+        0,
+        1,
+        2
+      ],
+      "prediction_PIL_modes": [
+        "L"
+      ],
+      "official_metrics_percent": {
+        "soil": 99.33,
+        "crop": 95.34,
+        "weed": 68.65,
+        "mIoU": 87.77
+      },
+      "prediction_dir": "/fj/AgriDSeq-JEPA/runs/published_baselines/erfnet/val",
+      "evaluation_seconds": 79.263
+    },
+    "DeepLabV3+": {
+      "source": "https://www.ipb.uni-bonn.de/html/projects/phenobench/semantic_segmentation/predictions/deeplab/deeplab-val.zip",
+      "archive": "/fj/AgriDSeq-JEPA/runs/published_baselines/deeplab-val.zip",
+      "download_bytes": 5600792,
+      "archive_sha256": "846f67be3e331f8b1ff85deae2d90ab1bcf8fe568015445640a9496ba331ed13",
+      "prediction_count": 772,
+      "exact_filename_match": true,
+      "all_prediction_size": [
+        1024,
+        1024
+      ],
+      "prediction_ids": [
+        0,
+        1,
+        2
+      ],
+      "prediction_PIL_modes": [
+        "L"
+      ],
+      "official_metrics_percent": {
+        "soil": 99.3,
+        "crop": 95.13,
+        "weed": 68.0,
+        "mIoU": 87.47
+      },
+      "prediction_dir": "/fj/AgriDSeq-JEPA/runs/published_baselines/deeplab/val",
+      "evaluation_seconds": 79.092
+    }
+  }
+}

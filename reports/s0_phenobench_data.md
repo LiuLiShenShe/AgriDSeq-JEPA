@@ -92,4 +92,4 @@ results = evaluate_semantics({
 | ERFNet | 99.28% | 94.30% | 64.37% | 85.98% | test |
 | DeepLabV3+ | 99.25% | 94.07% | 64.59% | 85.97% | test |
 
-本轮 best-val 不得据此声称独立 test 提升。官方仓库同时发布 [ERFNet val 预测](https://www.ipb.uni-bonn.de/html/projects/phenobench/semantic_segmentation/predictions/erfnet/erfnet-val.zip)和[DeepLabV3+ val 预测](https://www.ipb.uni-bonn.de/html/projects/phenobench/semantic_segmentation/predictions/deeplab/deeplab-val.zip)；如需同拆分参照，可对这些已公开预测运行相同官方评价，不涉及训练第二模型，但应单独记录下载与评价事实。**本报告未下载或评价 baseline 预测，未提供虚构 val baseline 数字。**
+本轮 best-val 不得据此声称独立 test 提升。官方仓库同时发布 [ERFNet val 预测](https://www.ipb.uni-bonn.de/html/projects/phenobench/semantic_segmentation/predictions/erfnet/erfnet-val.zip)和[DeepLabV3+ val 预测](https://www.ipb.uni-bonn.de/html/projects/phenobench/semantic_segmentation/predictions/deeplab/deeplab-val.zip)；如需同拆分参照，可对这些已公开预测运行相同官方评价，不涉及训练第二模型，但应单独记录下载与评价事实。后续本轮已实际下载两份官方 val 预测并运行同一官方 devkit；完整来源、归档 SHA-256、772/772 检查与实测 val 指标见 `reports/published_baselines_val.md` 和 `reports/published_baselines_val.json`。
