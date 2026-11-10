@@ -1,0 +1,80 @@
+{
+  "checkpoint": "runs/phenobench_dseq_vitb16_s20261110/checkpoints/phenobench_upernet_step10000.pth",
+  "bytes": 1522025834,
+  "optimizer_updates": 10000,
+  "consumed_microbatches": 80000,
+  "adamw_parameter_states": 199,
+  "adamw_step_min": 10000.0,
+  "adamw_step_max": 10000.0,
+  "poly_step": 10000,
+  "component_state_tensor_counts": {
+    "backbone": 150,
+    "neck": 8,
+    "decode_head": 74,
+    "auxiliary_head": 8
+  },
+  "rng_keys": [
+    "python",
+    "numpy",
+    "torch",
+    "cuda"
+  ],
+  "active_backbone_weight_changes": {
+    "patch_embed.proj.weight": {
+      "l2_delta": 1.9821034669876099,
+      "max_abs_delta": 0.02593599259853363
+    },
+    "blocks.0.attn.qkv.weight": {
+      "l2_delta": 4.178468227386475,
+      "max_abs_delta": 0.028760407119989395
+    },
+    "blocks.1.attn.qkv.weight": {
+      "l2_delta": 5.089717864990234,
+      "max_abs_delta": 0.05427759885787964
+    },
+    "blocks.2.attn.qkv.weight": {
+      "l2_delta": 4.542779922485352,
+      "max_abs_delta": 0.03159540519118309
+    },
+    "blocks.3.attn.qkv.weight": {
+      "l2_delta": 4.686692237854004,
+      "max_abs_delta": 0.036555156111717224
+    },
+    "blocks.4.attn.qkv.weight": {
+      "l2_delta": 4.090700626373291,
+      "max_abs_delta": 0.0302920863032341
+    },
+    "blocks.5.attn.qkv.weight": {
+      "l2_delta": 3.939722776412964,
+      "max_abs_delta": 0.029875583946704865
+    },
+    "blocks.6.attn.qkv.weight": {
+      "l2_delta": 2.9418134689331055,
+      "max_abs_delta": 0.018282515928149223
+    },
+    "blocks.7.attn.qkv.weight": {
+      "l2_delta": 2.3261115550994873,
+      "max_abs_delta": 0.018579941242933273
+    },
+    "blocks.8.attn.qkv.weight": {
+      "l2_delta": 0.9962611794471741,
+      "max_abs_delta": 0.00958145223557949
+    },
+    "blocks.9.attn.qkv.weight": {
+      "l2_delta": 0.9071826934814453,
+      "max_abs_delta": 0.006284437607973814
+    },
+    "blocks.10.attn.qkv.weight": {
+      "l2_delta": 0.8093713521957397,
+      "max_abs_delta": 0.006747577339410782
+    },
+    "blocks.11.attn.qkv.weight": {
+      "l2_delta": 0.8254011869430542,
+      "max_abs_delta": 0.0055343471467494965
+    }
+  },
+  "official_fixed_token_max_abs_delta": {
+    "pos_embed": 0.0,
+    "cls_token": 0.0
+  }
+}
