@@ -17,3 +17,5 @@
 用户引用的 `/home/test/.codex/RTK.md` 实际不存在，未声称读取。Bocha实测HTTP403余额/配额不足；一手证据来自实时克隆的上游和用户指定官方页面。Context7已实际先library后docs核查PyTorch2.5.1、GitHub CLI及PhenoBench文档。
 
 来源：[官方代码](https://github.com/SkyShunsuke/DSeq-JEPA/tree/123082374389f78e4516157187681f9d5edb4310)、[PyTorch CUDA环境文档](https://github.com/pytorch/pytorch/blob/v2.5.1/docs/source/cuda_environment_variables.rst)、本机nvidia-smi/df/uv真实执行记录。
+
+运行期资源补充：2026-11-10 11:58实际查询确认本任务PID3322358绑定GPU1 UUID，训练入口为本项目run_phenobench.py。GPU1另有PID3414713科研任务（不是本任务，11:46:42启动）；本项目未终止或修改该进程。后续NVML设备显存/功率是共享设备总量，不能作为本任务独占成本；本任务allocator峰值独立记录。GPU0两个既有任务仍在。

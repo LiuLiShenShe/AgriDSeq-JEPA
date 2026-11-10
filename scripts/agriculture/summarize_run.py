@@ -60,9 +60,9 @@ mean_update=float(np.mean([float(r['update_seconds']) for r in train])) if train
 
 状态 {status['status']}，正式optimizer updates {updates}/10000，microbatch2×accum8=有效16。
 物理GPU1 RTX A6000，UUID GPU-6836f890-98b2-5891-07ef-675c25199c65；BF16+作者activation checkpoint。
-训练和周期val累计墙钟 {elapsed:.2f}s ({elapsed/3600:.4f} GPU-hours)；平均每optimizer update {mean_update:.4f}s。
+训练和周期val累计墙钟 {elapsed:.2f}s ({elapsed/3600:.4f} 单GPU任务运行小时，非独占GPU小时)；平均每optimizer update {mean_update:.4f}s。
 训练allocator峰值 {peak_alloc:.4f}GiB，reserved峰值 {peak_reserved:.4f}GiB；NVML监控峰值 {peak_nvml:.1f}MiB。
-10s采样遥测区间 {sensor_seconds:.2f}s，GPU板卡功率梯形积分 {energy:.5f}kWh（不含整机CPU/磁盘能耗，不能当电费账单）。遥测开始于正式训练约170秒后；不外推缺失区间功耗。实测温度峰值{peak_temperature:.1f}°C。遥测原始CSV在Git忽略的run中。
+10s采样遥测区间 {sensor_seconds:.2f}s，GPU板卡功率梯形积分 {energy:.5f}kWh。初始GPU1空闲，但训练期间另有用户任务启动，设备显存/功率含其他进程，不能全部归因于本实验，也不含整机CPU/磁盘能耗或代表电费账单。PyTorch allocator峰值属于本任务。遥测开始于正式训练约170秒后；不外推缺失区间功耗。实测设备温度峰值{peak_temperature:.1f}°C。遥测原始CSV在Git忽略的run中。
 烟雾工程检查另行记录reports/smoke_verification.json和smoke_resume_verification.json，不计正式10kupdates。最终best重新评价计入持续遥测区间，训练status耗时终点为训练完成。
 
 来源：实际train_log.csv、status.json、gpu_telemetry.csv；没有估算未执行的更新。
