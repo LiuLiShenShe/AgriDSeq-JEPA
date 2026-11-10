@@ -1,0 +1,69 @@
+data:
+  root_path: /data/datasets/PhenoBench/PhenoBench-v110
+  dataset_name: phenobench
+  num_classes: 3
+  crop_size: 512
+  base_size: [1024, 512]
+  ratio_range: [0.5, 2.0]
+  test_scale: null
+  batch_size_per_replica: 2
+  num_workers: 8
+  pin_memory: true
+  manifest_path: reports/phenobench_train_val_manifest.csv
+  manifest_sha256: 6ce0232f323c1bf055f4b6f588872ca5605ae964bb26a541109780e63d307f3b
+  original_zip_sha256: a310c1c1dcfec4ca4897097fd38c02af39ea24112f658fd9408d5deb3c7c8bfc
+segmentation:
+  channels: 512
+  pool_scales: [1, 2, 3, 6]
+  dropout: 0.1
+  use_aux_head: true
+  aux_index: 2
+  aux_channels: 256
+  aux_loss_weight: 0.4
+opt:
+  iterations: 10000
+  accumulation_steps: 8
+  name: adamw
+  clip_grad: 0.0
+  weight_decay: 0.05
+  lr:
+    auto_lr_scaling: false
+    base_lr: 1.0e-4
+    base_lr_batch_size: 16
+    warmup_iters: 1500
+    warmup_ratio: 1.0e-6
+    power: 1.0
+    min_lr: 0.0
+    backbone_lr_scale: 1.0
+  use_bfloat16: true
+  bias_decay: false
+  norm_decay: false
+  global_seed: 20261110
+framework:
+  name: segmentation
+model:
+  pretrained_type: mae
+  pretrained_weights: runs/pretrained/mae_pretrain_vit_base.pth
+  pretrained_sha256: aec5f0b68e5f3193a00b07bc65a37440db549c15b36b8bea242606cc40c4bc5d
+  model_name: vit_base
+  patch_size: 16
+  crop_size: 224
+  use_masked_vit: true
+  use_class_token: true
+  strict_load: true
+  out_layers: [3, 5, 7, 11]
+  drop_path_rate: 0.1
+  window_size: 0
+  use_checkpoint: true
+  freeze_backbone: false
+resume:
+  resume_path: null
+logging:
+  log_dir: runs/phenobench_mae_vitb16_s20261110
+  log_step_freq: 20
+  eval:
+    eval_iter_freq: 1000
+    slide_stride: 341
+  ckpt:
+    ckpt_iter_freq: 1000
+    milestones: [1000, 5000, 10000]

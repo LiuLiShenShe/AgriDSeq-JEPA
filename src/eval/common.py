@@ -104,10 +104,17 @@ def build_pretrained_encoder(params, device, img_size: Optional[int] = None):
     pretrained_weights = model_params['pretrained_weights']
     assert pretrained_weights is not None, \
         "Please provide `model.pretrained_weights` (a JEPA pre-training checkpoint)."
-    encoder = load_jepa_target_encoder_weights(
-        encoder, pretrained_weights, device,
-        strict=model_params.get('strict_load', True),
-    )
+    pretrained_type = model_params.get('pretrained_type', 'dseqjepa')
+    if pretrained_type == 'dseqjepa':
+        encoder = load_jepa_target_encoder_weights(
+            encoder, pretrained_weights, device,
+            strict=model_params.get('strict_load', True),
+        )
+    elif pretrained_type == 'mae':
+        from src.utils.mae_checkpoint_adapter import load_mae_encoder_weights
+        encoder = load_mae_encoder_weights(encoder, pretrained_weights)
+    else:
+        raise ValueError(f'Unsupported pretrained_type: {pretrained_type}')
     return encoder
 
 
