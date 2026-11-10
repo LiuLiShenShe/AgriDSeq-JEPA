@@ -1,6 +1,6 @@
 # S1 PhenoBench正式验证结果
 
-真实状态：TRAINING_IN_PROGRESS；已完成 8084/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
+真实状态：TRAINING_IN_PROGRESS；已完成 9185/10000 optimizer updates。以下周期指标只来自完整772val官方devkit。
 
 | optimizer updates | Soil IoU | Crop IoU | Weed IoU | mIoU |
 |---:|---:|---:|---:|---:|
@@ -12,10 +12,11 @@
 | 6000 | 99.46 | 95.74 | 71.94 | 89.05 |
 | 7000 | 99.46 | 95.86 | 73.47 | 89.6 |
 | 8000 | 99.47 | 95.94 | 73.67 | 89.69 |
+| 9000 | 99.48 | 95.98 | 74.41 | 89.96 |
 
 
 最终恢复best-val并重新导出全部772张1024×1024PNG的官方结果：尚未完成最终best-val重新导出和官方评价。
-best选择步数 8000，按官方val mIoU选择，不是独立test。
+best选择步数 9000，按官方val mIoU选择，不是独立test。
 原始预测路径 `runs/phenobench_dseq_vitb16_s20261110/predictions/val/semantics/*.png`；权重与PNG不提交Git。官方CLI及官方函数返回JSON保存在run/metrics。
 交叉confusion核对结果见reports/s1_confusion_crosscheck.json（若已生成）；正式指标以官方devkit为准。
 
@@ -25,11 +26,11 @@ best选择步数 8000，按官方val mIoU选择，不是独立test。
 
 | 方法（同772张val，原始1024坐标） | Soil IoU | Crop IoU | Weed IoU | mIoU |
 |---|---:|---:|---:|---:|
-| DSeq-JEPA当前best-val | 99.47% | 95.94% | 73.67% | 89.69% |
+| DSeq-JEPA当前best-val | 99.48% | 95.98% | 74.41% | 89.96% |
 | ERFNet | 99.33% | 95.34% | 68.65% | 87.77% |
 | DeepLabV3+ | 99.30% | 95.13% | 68.00% | 87.47% |
 
 
-相对ERFNet公开val预测重评：mIoU +1.92个百分点，Weed IoU +5.02个百分点。此表是同拆分参照：本方法经过val选择，baseline的backbone、训练crop、损失权重、优化协议和预算不同，因此差值不能单独归因于JEPA预训练。详细公开配置及下载/评价证据见published_baselines_val.md。
+相对ERFNet公开val预测重评：mIoU +2.19个百分点，Weed IoU +5.76个百分点。此表是同拆分参照：本方法经过val选择，baseline的backbone、训练crop、损失权重、优化协议和预算不同，因此差值不能单独归因于JEPA预训练。详细公开配置及下载/评价证据见published_baselines_val.md。
 
 来源：[固定官方评价实现](https://github.com/PRBonn/phenobench/blob/0edc128ef7f67c8c6577554c7d1a2e382e2ea81f/src/phenobench/evaluation/evaluate_semantics.py)，本项目实际val日志与预测。
