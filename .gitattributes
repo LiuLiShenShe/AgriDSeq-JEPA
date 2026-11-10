@@ -1,0 +1,2 @@
+# Preserve fixed manifest bytes and recognize CSV CRLF line endings.
+reports/*.csv -text whitespace=cr-at-eol

@@ -1,0 +1,49 @@
+{
+  "step": 22,
+  "restore": true,
+  "gradients": {},
+  "one_val_prediction": {
+    "soil": 76.57191170733084,
+    "crop": 17.613904885263693,
+    "weed": 0.08591820857152521,
+    "mIoU": 31.42391160038869,
+    "confusion": [
+      [
+        787013,
+        92887,
+        147109
+      ],
+      [
+        735,
+        20126,
+        438
+      ],
+      [
+        65,
+        76,
+        127
+      ]
+    ]
+  },
+  "official_one_image": {
+    "soil": 76.57,
+    "crop": 17.61,
+    "weed": 0.09,
+    "mIoU": 31.42
+  },
+  "compute": {
+    "optimizer_updates": 22,
+    "consumed_microbatches": 176,
+    "main_loss": 1.164630115032196,
+    "aux_loss": 1.223069652915001,
+    "lr": 1.4000986000000002e-06,
+    "next_lr": 1.4667651999999998e-06,
+    "microbatch": 2,
+    "accumulation_steps": 8,
+    "effective_batch": 16,
+    "update_seconds": 0.8323976440005936,
+    "elapsed_seconds": 25.05723701097304,
+    "peak_allocated_gib": 3.5111279487609863,
+    "peak_reserved_gib": 3.8515625
+  }
+}
