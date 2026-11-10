@@ -47,7 +47,10 @@ for path in sorted((args.root/'val'/'semantics').glob('*.png')):
 with (destination/'per_image_errors.csv').open('w', newline='') as f:
     writer = csv.DictWriter(f, fieldnames=list(rows[0]), lineterminator='\n')
     writer.writeheader(); writer.writerows(rows)
-selected = sorted((r for r in rows if r['weed_pixels'] >= 100), key=lambda r:r['weed_IoU'])[:8]
+candidate_cases = (sorted((r for r in rows if r['weed_pixels'] >= 100), key=lambda r:r['weed_IoU'])[:3]
+                   + sorted(rows, key=lambda r:r['weed_fn'], reverse=True)[:3]
+                   + sorted(rows, key=lambda r:r['weed_as_crop'], reverse=True)[:2])
+selected = list({r['filename']:r for r in candidate_cases}.values())
 for row in selected:
     name = row['filename']
     rgb = Image.open(args.root/'val'/'images'/name).convert('RGB')
