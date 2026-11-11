@@ -1,0 +1,124 @@
+{
+  "step": 10000,
+  "consumed_batches": 80000,
+  "optimizer_steps": [
+    10000
+  ],
+  "optimizer_parameter_state_count": 199,
+  "scheduler": {
+    "base_lr": 0.0001,
+    "total_steps": 10000,
+    "warmup_steps": 1500,
+    "warmup_ratio": 1e-06,
+    "power": 1.0,
+    "min_lr": 0.0,
+    "_step": 10000
+  },
+  "rng_state_present": [
+    "cuda",
+    "numpy",
+    "python",
+    "torch"
+  ],
+  "frozen_cls_and_pos_equal_MAE_source": true,
+  "all_twelve_blocks_updated": {
+    "0": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "1": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "2": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "3": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "4": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "5": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "6": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "7": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "8": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "9": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "10": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    },
+    "11": {
+      "attn.qkv.weight": true,
+      "attn.proj.weight": true,
+      "mlp.fc1.weight": true,
+      "mlp.fc2.weight": true,
+      "norm1.weight": true,
+      "norm2.weight": true
+    }
+  },
+  "patch_final_norm_neck_main_aux_updated": true,
+  "actual_head_initialization_equal_S1_reconstruction": true
+}

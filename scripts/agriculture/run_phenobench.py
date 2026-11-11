@@ -125,6 +125,15 @@ def main():
     run.mkdir(parents=True, exist_ok=True)
     (run / 'checkpoints').mkdir(exist_ok=True)
     (run / 'config.yaml').write_text(yaml.safe_dump(config, sort_keys=False))
+    if config['model'].get('pretrained_type') == 'mae' and args.mode != 'eval' and not args.checkpoint:
+        from src.utils.mae_checkpoint_adapter import tensor_sha256
+        (run/'mae_weight_mapping.json').write_text(json.dumps(model.backbone.vit.mae_weight_mapping, indent=2))
+        (run/'initialization.json').write_text(json.dumps(dict(
+            seed=seed, total_parameters=sum(p.numel() for p in model.parameters()),
+            trainable_parameters=sum(p.numel() for p in model.parameters() if p.requires_grad),
+            downstream_tensors={n:tensor_sha256(t) for n,t in model.state_dict().items()
+                                if not n.startswith('backbone.')}
+        ), indent=2))
     data = config['data']
     if sha256(data['manifest_path']) != data['manifest_sha256']:
         raise ValueError('Fixed data manifest SHA-256 mismatch')
@@ -201,6 +210,8 @@ def main():
     model.train()
     samples = dict(backbone='backbone.vit.patch_embed.proj.weight',
                    decoder='decode_head.cls_seg.weight', auxiliary='auxiliary_head.cls_seg.weight')
+    if config['model'].get('pretrained_type') == 'mae':
+        samples['neck'] = 'neck.stages.0.0.weight'
     params = dict(model.named_parameters())
     initial = {k: params[n].detach().clone() for k,n in samples.items()}
     gradient_evidence = {}

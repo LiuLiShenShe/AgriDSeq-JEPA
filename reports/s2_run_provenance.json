@@ -1,0 +1,11 @@
+{
+  "git_commit": "6a537745067e4b4b2d9041425a75206525d0288c",
+  "config_sha256": "aa8e881d751885602aceae2191dd7652b273cea6f117bee02fee308aee0b4af4",
+  "pretrained_sha256": "aec5f0b68e5f3193a00b07bc65a37440db549c15b36b8bea242606cc40c4bc5d",
+  "data_manifest_sha256": "6ce0232f323c1bf055f4b6f588872ca5605ae964bb26a541109780e63d307f3b",
+  "original_zip_sha256": "a310c1c1dcfec4ca4897097fd38c02af39ea24112f658fd9408d5deb3c7c8bfc",
+  "cuda_visible_devices": "1",
+  "device_name": "NVIDIA RTX A6000",
+  "torch": "2.5.1+cu124",
+  "cuda": "12.4"
+}
